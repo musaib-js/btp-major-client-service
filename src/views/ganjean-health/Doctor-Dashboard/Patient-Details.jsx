@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
 import useFormWrapper from "../../../components/Form/index";
+import { ToastContainer, toast } from "react-toastify";
 import { useBaseQuery } from "../../../api/BaseRequest";
 import { Button } from "@mui/material";
 import SideNavBar from "./Navbar/index";
@@ -13,35 +14,47 @@ import useApiStore from "../../../api/api";
 const PatientDetails = () => {
   const { id } = useParams();
   const api = useApiStore();
-  console.log(id);
-  const { data } = useBaseQuery(`/health/appointments`, {
+  const { data } = useBaseQuery(`/health/appointments/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
+  console.log(data);
 
-  const onSubmit = async (data) => {
-    console.log(data, "formdata string");
-    // const payload = {
-    //   appointment_id: parseInt(id),
-    //   symptoms: formdata?.symptoms,
-    //   diagnosis: formdata?.diagnosis,
-    //   advice: formdata?.advice,
-    //   prescription: formdata?.prescription,
-    // };
-    // console.log(payload);
-    // try {
-    //   await api.generateReport(payload);
-    // } catch {
-    //   console.error("Error");
-    // }
+  const onSubmit = async (formdata) => {
+    const payload = {
+      appointment_id: parseInt(id),
+      symptoms: formdata?.symptoms,
+      diagnosis: formdata?.diagnosis,
+      advice: formdata?.advice,
+      prescription: formdata?.prescription,
+    };
+    console.log(payload);
+    try {
+      let data = await api.generateReport(payload);
+      console.log(data?.message);
+      toast.success(data?.message);
+    } catch {
+      console.error(errors);
+    }
+    handleReset();
   };
-  const { register, handleSubmit } = useFormWrapper({ onSubmit });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useFormWrapper({ onSubmit });
   const [openNav, setOpenNav] = useState(true);
 
+  const handleReset = () => {
+    reset();
+  };
+  console.log(data?.name?.split(" ")[0]);
   return (
     <Box p={2} sx={{ ml: 44 }}>
+      <ToastContainer />
       <SideNavBar openNav={openNav} onCloseNav={() => setOpenNav(false)} />
       <Box>
         <Typography
@@ -73,11 +86,10 @@ const PatientDetails = () => {
             </label>
             <TextField
               {...register("firstName", { required: true })}
-              label="First Name"
               variant="outlined"
               fullWidth
               margin="normal"
-              defaultValue={data?.[0]?.name.split(" ")[0]}
+              value={data?.name?.split(" ")[0]}
             />
           </Box>
           <Box
@@ -92,11 +104,10 @@ const PatientDetails = () => {
             </label>
             <TextField
               {...register("last_name", { required: true })}
-              label="Last Name"
               variant="outlined"
               fullWidth
               margin="normal"
-              defaultValue={data?.[0]?.name.split(" ")[1]}
+              value={data?.name?.split(" ")[1]}
             />
           </Box>
           <Box
@@ -106,17 +117,17 @@ const PatientDetails = () => {
               justifyContent: "space-between",
             }}
           >
-            <label style={{ minWidth: "150px" }} htmlFor="phonenumber">
+            <label style={{ minWidth: "150px" }} htmlFor="phone_number">
               Phone Number
             </label>
 
             <TextField
-              {...register("phoneNumber", { required: true })}
               variant="outlined"
               fullWidth
+              name="phone_number"
               margin="normal"
               disabled
-              defaultValue={data?.[0]?.phone_number}
+              value={data?.phone_number}
             />
           </Box>
           <Box
@@ -130,12 +141,12 @@ const PatientDetails = () => {
               Email
             </label>
             <TextField
-              label="Email"
               variant="outlined"
               fullWidth
+              name="email"
               disabled
               margin="normal"
-              defaultValue={data?.[0]?.email}
+              value={data?.email}
             />
           </Box>
           <Box
@@ -150,11 +161,10 @@ const PatientDetails = () => {
             </label>
             <TextField
               {...register("address", { required: true })}
-              label="Address"
               variant="outlined"
               fullWidth
               margin="normal"
-              defaultValue={data?.[0]?.address}
+              value={data?.address}
             />
           </Box>
           <Box
