@@ -38,7 +38,7 @@ const routesConfig = [
   {
     label: "Home",
     path: "/",
-    component: <Home />,
+    component: <HealthPortal />,
     icon: <OtherHousesOutlinedIcon />,
     isSideBarLink: false,
   },
@@ -73,7 +73,7 @@ const routesConfig = [
   {
     label: "Health Portal",
     path: "/health",
-    component: <Home />,
+    component: <HealthPortal />,
     icon: <OtherHousesOutlinedIcon />,
     isSideBarLink: false,
   },
