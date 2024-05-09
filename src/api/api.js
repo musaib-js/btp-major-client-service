@@ -291,12 +291,14 @@ const useApiStore = () => {
     }
   };
   const generateReport = async (formData) => {
+    let data;
     try {
-      const data = await generateReportMutation.mutateAsync(formData);
+      data = await generateReportMutation.mutateAsync(formData);
       console.log("Report generated successfully:", data);
     } catch (error) {
       throw error;
     }
+    return data;
   };
 
   return {
