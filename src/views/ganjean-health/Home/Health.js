@@ -8,9 +8,13 @@ import Testmonials from "../Testmonials/index.js";
 import WhyChooseUs from '../whyChooseUs/index.js';
 import { Packages } from '../TestPackages/Index.js';
 import Slider from "../../../components/Slider/Carousel.js"
-
+import {useNavigate} from "react-router-dom"
 export default function Main() {
-  // for slider images
+  const navigate = useNavigate()
+  const role = localStorage.getItem(role)
+  if(role==="doctor"){
+    navigate("/doctor-dashboard")
+  }
   const images = [Bg, Bg2];
   const imagesMobile = [BgM, BgM, BgM];
   const theme = useTheme();

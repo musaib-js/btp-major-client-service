@@ -73,7 +73,7 @@ const routesConfig = [
   {
     label: "Health Portal",
     path: "/health",
-    component: <HealthPortal />,
+    component: <Home />,
     icon: <OtherHousesOutlinedIcon />,
     isSideBarLink: false,
   },
@@ -89,7 +89,7 @@ const routesConfig = [
     path: "/pricing",
     component: <Pricing />,
     icon: <PriceChangeOutlinedIcon />,
-    isSideBarLink: true,
+    isSideBarLink: false,
   },
   {
     label: "Privacy Policy",
@@ -103,7 +103,7 @@ const routesConfig = [
     path: "/careers",
     component: <Jobs />,
     icon: <PolicyOutlinedIcon />,
-    isSideBarLink: true,
+    isSideBarLink: false,
   },
   {
     label: "JobDetails",
