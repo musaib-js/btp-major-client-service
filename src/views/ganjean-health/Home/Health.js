@@ -11,7 +11,7 @@ import Slider from "../../../components/Slider/Carousel.js"
 import {useNavigate} from "react-router-dom"
 export default function Main() {
   const navigate = useNavigate()
-  const role = localStorage.getItem(role)
+  const role = localStorage.getItem("role")
   if(role==="doctor"){
     navigate("/doctor-dashboard")
   }
