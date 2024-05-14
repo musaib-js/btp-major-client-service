@@ -163,7 +163,7 @@ const DoctorDashboard = () => {
         <Box
           sx={{
             display: "flex",
-            gap: 10,
+            gap: 5,
             flexWrap: "wrap",
             justifyContent: "space-between",
             marginBottom: 5,
