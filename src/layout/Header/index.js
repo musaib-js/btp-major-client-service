@@ -22,6 +22,7 @@ const Header = () => {
   const isTabletOrBelow = useMediaQuery('(max-width: 960px)');
   const accessToken = localStorage.getItem('access_token');
   const refreshToken = localStorage.getItem('refresh_token');
+  const role = localStorage.getItem("role")
 
   const handleLogout = () => {
     localStorage.clear();
@@ -74,7 +75,7 @@ const Header = () => {
           <Box>
             {refreshToken && accessToken ? (
               <Box sx={{display: "flex", alignItems: "center"}}>
-                <Link to="/dashboard" style={{ textDecoration: "none", display:"flex" }}><DashboardIcon sx={{ width: "30px", height: "30px", color: "#098fff" }} /></Link>
+                <Link to={role!="doctor" ? "/dashboard": "/doctor-dashboard"} style={{ textDecoration: "none", display:"flex" }}><DashboardIcon sx={{ width: "30px", height: "30px", color: "#098fff" }} /></Link>
                 <LogoutIcon color="primary" onClick={handleLogout} sx={{ marginLeft: "12px" }} />
               </Box>
 
