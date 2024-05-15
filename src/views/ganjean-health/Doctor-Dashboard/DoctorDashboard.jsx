@@ -6,19 +6,15 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Checkbox from "@mui/material/Checkbox";
-import { doctorInfo } from "./Doctor-info";
 import { useBaseQuery } from "../../../api/BaseRequest";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { green, red } from "@mui/material/colors";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import PatientDetails from "./Patient-Details";
+import Spinner from "../../../components/CustomLoader";
 
 const DoctorDashboard = () => {
   const [openNav, setOpenNav] = useState(true);
@@ -34,7 +30,16 @@ const DoctorDashboard = () => {
       "Content-Type": "application/json",
     },
   });
-  console.log(data);
+
+  const { data:doctorProfile, isLoading, refetch } = useBaseQuery(`/users/profile`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  console.log("dr profile", doctorProfile)
+  
   const [filteredRows, setFilteredRows] = useState([]);
   const formatDate = (date) => {
     const year = date.getFullYear();
@@ -159,7 +164,8 @@ const DoctorDashboard = () => {
           overflow: "auto",
         }}
       >
-        <h1>Welcome to the Doctor Dashboard, {data?.[0]?.doctor?.name}</h1>
+        <h1>Welcome to the Doctor Dashboard, {doctorProfile?.name}</h1>
+        {isLoading? <Spinner /> : (
         <Box
           sx={{
             display: "flex",
@@ -173,7 +179,7 @@ const DoctorDashboard = () => {
             sx={{
               width: 200,
               background:
-                "linear-gradient(to bottom, #BBDEFB 20%, #E3F2FD 80%)",
+                "linear-gradient(to bottom, #098fff 20%, #E3F2FD 80%)",
               boxShadow: 5,
               borderRadius: "10px",
             }}
@@ -183,7 +189,7 @@ const DoctorDashboard = () => {
                 Specialization
               </Typography>
               <Typography variant="body2">
-                {data?.[0]?.doctor?.specialization}
+                {doctorProfile?.specialization}
               </Typography>
             </CardContent>
           </Card>
@@ -191,7 +197,7 @@ const DoctorDashboard = () => {
             sx={{
               width: 200,
               background:
-                "linear-gradient(to bottom, #BBDEFB 20%, #E3F2FD 80%)",
+                "linear-gradient(to bottom, #098fff 20%, #E3F2FD 80%)",
               boxShadow: 5,
               borderRadius: "10px",
             }}
@@ -201,7 +207,7 @@ const DoctorDashboard = () => {
                 Degree
               </Typography>
               <Typography variant="body2">
-                {data?.[0]?.doctor?.degree}
+                {doctorProfile?.degree}
               </Typography>
             </CardContent>
           </Card>
@@ -209,7 +215,7 @@ const DoctorDashboard = () => {
             sx={{
               width: 200,
               background:
-                "linear-gradient(to bottom, #BBDEFB 20%, #E3F2FD 80%)",
+                "linear-gradient(to bottom, #098fff 20%, #E3F2FD 80%)",
               boxShadow: 5,
               borderRadius: "10px",
             }}
@@ -219,7 +225,7 @@ const DoctorDashboard = () => {
                 No. of Appointments
               </Typography>
               <Typography variant="body2">
-                {data?.[0]?.doctor?.number_of_appointments}
+                {doctorProfile?.number_of_appointments}
               </Typography>
             </CardContent>
           </Card>
@@ -227,7 +233,7 @@ const DoctorDashboard = () => {
             sx={{
               width: 200,
               background:
-                "linear-gradient(to bottom, #BBDEFB 20%, #E3F2FD 80%)",
+                "linear-gradient(to bottom, #098fff 20%, #E3F2FD 80%)",
               boxShadow: 5,
               borderRadius: "10px",
             }}
@@ -237,50 +243,13 @@ const DoctorDashboard = () => {
                 Address
               </Typography>
               <Typography variant="body2">
-                {data?.[0]?.doctor?.address}
+                {doctorProfile?.address}
               </Typography>
             </CardContent>
           </Card>
         </Box>
-        <Box mb={2}>
-          <Box
-            sx={{
-              marginBottom: 2,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Box sx={{ width: 180, bgcolor: "whitesmoke" }}>
-                <DatePicker
-                  selected={searchDate}
-                  onChange={(date) => setSearchDate(date)}
-                  dateFormat="yyyy-MM-dd"
-                  placeholderText="Select Date"
-                  sx={{
-                    "& .react-datepicker__input": {
-                      height: "100px",
-                    },
-                  }}
-                />
-              </Box>
-              <Button variant="contained" onClick={handleSearch} sx={{ ml: 2 }}>
-                Search
-              </Button>
-            </Box>
-            <Button
-              variant="contained"
-              sx={{
-                ml: 2,
-                bgcolor: "green",
-                color: "white",
-              }}
-            >
-              Add Patient
-            </Button>
-          </Box>
-        </Box>
+        )}
+
         <Box>
           <DataGrid
             rows={

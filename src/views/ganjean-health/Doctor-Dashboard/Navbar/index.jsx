@@ -28,7 +28,7 @@ const SideNavBar = () => {
       <List sx={{ mt: 10 }}>
         <Box
           sx={{
-            backgroundColor: "#E3F2FD",
+            backgroundColor: "#098fff",
             borderRadius: "10px",
             margin: "10px",
             padding: "5px",
@@ -39,7 +39,7 @@ const SideNavBar = () => {
           <ListItemIcon sx={{ ml: 3 }}>
             <AccountCircleIcon />
           </ListItemIcon>
-          <ListItemText sx={{ color: "MenuText" }} primary={doctorInfo.name} />
+          <ListItemText sx={{ color: "MenuText" }} primary={localStorage.getItem("username")} />
         </Box>
         <Box
           sx={{
@@ -65,7 +65,7 @@ const SideNavBar = () => {
           >
             <ListItemText
               sx={{
-                color: "#1E88E5", // Blue color
+                color: "#098fff", // Blue color
                 fontWeight: "700",
               }}
               primary="Home"
@@ -84,7 +84,7 @@ const SideNavBar = () => {
           >
             <ListItemText
               sx={{
-                color: "#1E88E5",
+                color: "#098fff",
                 fontWeight: "700",
               }}
               primary="About"
@@ -103,7 +103,7 @@ const SideNavBar = () => {
           >
             <ListItemText
               sx={{
-                color: "#1E88E5",
+                color: "#098fff",
                 fontWeight: "700",
               }}
               primary="Contact"
