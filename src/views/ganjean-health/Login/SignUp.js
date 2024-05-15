@@ -212,7 +212,7 @@ const SignUpForm = ({ onToggleForm }) => {
                                         autoComplete="username"
                                         {...register('username', {
                                             required: 'User Name is required', validate: {
-                                                minLength: (usernameLength) => usernameLength.length === 3 || "The username should have atleast 2 characters",
+                                                minLength: (usernameLength) => usernameLength.length >= 3 || "The username should have atleast 2 characters",
                                             }
                                         })}
                                     />

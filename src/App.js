@@ -1,9 +1,14 @@
 import React from 'react';
 import './App.css';
 import Routes from './routes';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme/Index';
+
+export const queryClient = new QueryClient();
 
 function App() {
 
