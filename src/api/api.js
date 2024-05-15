@@ -84,7 +84,7 @@ const useApiStore = () => {
     }
   );
 
-  const testBookMutation = useBaseMutation("/health/test-book/", {
+  const testBookMutation = useBaseMutation("/health/test/", {
     method: "POST",
     headers: {
       "Content-Type": "multipart/form-data",

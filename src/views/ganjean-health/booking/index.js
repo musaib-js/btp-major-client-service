@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import React, { useState} from "react";
+import React, { useState } from "react";
 import useApiStore from "../../../api/api";
 import useFormWrapper from "../../../components/Form/index";
 import useToggle from "../../../hooks/Toggle";
@@ -77,6 +77,21 @@ const SignUpForm = ({ onToggleForm }) => {
                 variant="standard"
                 {...register("phone_number", {
                   required: "Phone number is required",
+                })}
+              />
+
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                hidden
+                label="Email"
+                name="email"
+                autoComplete="email"
+                variant="standard"
+                value={localStorage.getItem("email")}
+                {...register("email", {
+                  required: "Email is required",
                 })}
               />
 
