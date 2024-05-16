@@ -47,6 +47,7 @@ const useApiStore = () => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.getItem("access_token")}`
     },
   });
 
@@ -294,7 +295,6 @@ const useApiStore = () => {
     let data;
     try {
       data = await generateReportMutation.mutateAsync(formData);
-      console.log("Report generated successfully:", data);
     } catch (error) {
       throw error;
     }
