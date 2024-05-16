@@ -38,7 +38,6 @@ const DoctorDashboard = () => {
     },
   });
 
-  console.log("dr profile", doctorProfile)
   
   const [filteredRows, setFilteredRows] = useState([]);
   const formatDate = (date) => {
@@ -151,7 +150,6 @@ const DoctorDashboard = () => {
       headerClassName: "header-blue",
     },
   ];
-  console.log(data?.[0]?.doctor?.name);
   return (
     <Box sx={{ display: "flex" }}>
       <SideNavBar openNav={openNav} onCloseNav={() => setOpenNav(false)} />

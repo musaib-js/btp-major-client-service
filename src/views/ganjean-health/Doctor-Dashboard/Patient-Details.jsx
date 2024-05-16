@@ -30,7 +30,6 @@ const PatientDetails = () => {
       advice: formdata?.advice,
       prescription: formdata?.prescription,
     };
-    console.log(payload);
     try {
       let data = await api.generateReport(payload);
       console.log(data?.message);
@@ -38,7 +37,6 @@ const PatientDetails = () => {
     } catch {
       console.error(errors);
     }
-    handleReset();
   };
   const {
     register,
@@ -48,9 +46,6 @@ const PatientDetails = () => {
   } = useFormWrapper({ onSubmit });
   const [openNav, setOpenNav] = useState(true);
 
-  const handleReset = () => {
-    reset();
-  };
   console.log(data?.name?.split(" ")[0]);
   return (
     <Box p={2} sx={{ ml: 44 }}>
@@ -256,7 +251,7 @@ const PatientDetails = () => {
               {...register("advice", { required: true })}
             />
           </Box>
-          <Button sx={{ ml: 19 }} variant="contained" type="submit">
+          <Button fullWidth sx={{ mt: 3, mb: 2, borderRadius: "25px" }} variant="contained" type="submit">
             Save
           </Button>
         </Box>
