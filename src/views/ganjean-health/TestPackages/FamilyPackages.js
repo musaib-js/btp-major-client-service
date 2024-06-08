@@ -57,7 +57,7 @@ export default function FamilyPackages({ data, isLoading }) {
                 <SectionHeading heading={"Family Packages"} textAlign={'left'} />
                 {/* {console.log(data)} */}
             </Grid>
-            {!isLoading ? (
+            {!isLoading && data ? (
                 <Grid item sx={{ width: "100%" }} >
                     <Slider>
                         {data?.data?.filter(item => item.is_family).map((item, index) => (
