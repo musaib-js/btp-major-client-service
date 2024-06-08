@@ -55,7 +55,7 @@ export default function TopPackages({ data, isLoading }) {
             <Grid item mb="-30px">
                 <SectionHeading heading={"Top Health Packages"} />
             </Grid>
-            {!isLoading ? (
+            {!isLoading && data ? (
                 <Grid item sx={{ width: "100%" }} >
                     <Slider>
                         {data.data.filter(item => item.is_top).map((item, index) => (
